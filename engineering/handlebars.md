@@ -102,22 +102,6 @@ In the next example, we only remove space from inside the individual list items:
 </ul>
 ```
 
-## Comments
-The most common Handlebars comment at DockYard is a `TODO`. `TODO`s are used to track items that need to be completed at a later date (such as incomplete placeholder links, images, and copy) or when engineering is needed to complete the work.
-
-When writing a `TODO`, specify if it is for UXD or engineering. If it’s for UXD, make sure to communicate that `TODO` with a UXD team member via a tag in the PR, a ping in the project Slack, or both.
-
-When you finish a `TODO`, delete the comment.
-
-Example:
-```html
-{{! TODO UXD: Add `is-active` styling for the button below }}
-<button>Add Event</button>
-```
-
 ## Resources
-* [The Art of Comments](https://css-tricks.com/the-art-of-comments/)
-* [Clear communication through HTML and GitHub](https://dockyard.com/blog/2015/09/02/clear-communication-through-html)
 * [Handlebars Whitespace Control](https://handlebarsjs.com/expressions.html#whitespace-control)
 * [Ember White Space Playground](https://emberjs.jsbin.com/nubup/1/edit?html,css,js,output)
-* [VS Code TODO Highlighter](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
