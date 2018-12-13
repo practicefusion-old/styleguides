@@ -106,18 +106,20 @@ POJO, which is sometimes preferable in testing. It also yields a more
 informative error when called with `null` or `undefined`.
 
 Although when defining a method in a controller, component, etc. you
-can be fairly sure `this` is an Ember Object, for consistency with the
-above, we still use `get`/`set`.
+can be fairly sure `this` is an Ember Object, so using `get`/`set` is optional in this case.
 
 ```js
 // Good
 import { get, set } from '@ember/object';
 
-set(this, 'isSelected', true);
-get(this, 'isSelected');
+set(someObj, 'isSelected', true);
+get(someObj, 'isSelected');
 
 // Bad
+someObj.set('isSelected', true);
+someObj.get('isSelected');
 
+// Ok
 this.set('isSelected', true);
 this.get('isSelected');
 ```
@@ -143,7 +145,7 @@ fullName: computed('user.firstName', 'user.lastName', {
 ## Organizing your modules
 
 Ordering a module's properties in a predictable manner will make it easier to
-scan.
+scan. Within each of these categories, properties should be ordered alphabetically.
 
 1. __Plain properties__
 
@@ -163,11 +165,12 @@ scan.
 
    The hooks should be chronologically ordered by the order they are invoked in.
 
-5. __Functions__
+5. __Actions__
+
+6. __Functions__
 
    Public functions first, internal functions after.
 
-6. __Actions__
 
 ```js
 export default Component.extend({
@@ -188,22 +191,24 @@ export default Component.extend({
     // code
   },
 
-  // Functions
-  someFunction() {
-    // code
-  },
-
   actions: {
     someAction() {
       // Code
     }
   }
+
+  // Functions
+  someFunction() {
+    // code
+  },
+
+
 });
 ```
 
-### Override init
+### Override lifecycle hooks
 
-Rather than using the object's `init` hook via `on`, override init and
+Rather than using the object's lifecycle hooks e.g. `init` via `on`, override the lifecycle event and
 call `_super` with `...arguments`. This allows you to control execution
 order. [Don't Don't Override Init](https://dockyard.com/blog/2015/10/19/2015-dont-dont-override-init)
 
@@ -265,24 +270,7 @@ export default Model.extend({
 For consistency and ease of discover, list your query params first in
 your controller. These should be listed above default values.
 
-### Alias your model
-
-It provides a cleaner code to name your model `user` if it is a user. It
-is more maintainable, and will fall in line with future routable
-components
-
-```javascript
-export default Controller.extend({
-  user: alias('model')
-});
-```
-
 ## Templates
-
-### Do not use partials
-
-Always use components. Partials share scope with the parent view, use
-components will provide a consistent scope.
 
 ### Don't yield `this`
 
@@ -314,7 +302,7 @@ more complex logic in this case.
   <article>
     <img src={{post.image}} />
     <h1>{{post.title}}</h2>
-    <p>{{post.summar}}</p>
+    <p>{{post.summary}}</p>
   </article>
 {{/each}}
 ```
@@ -338,7 +326,7 @@ and also make it more clear that you are passing an action.
 ### Ordering static attributes, dynamic attributes, and action helpers for HTML elements
 
 Ultimately, we should make it easier for other developers to read templates.
-Ordering attributes and then action helpers will provide clarity.
+Ordering attributes and then action helpers will provide clarity. Alphabetize within categories.
 
 ```hbs
 {{! Bad }}
