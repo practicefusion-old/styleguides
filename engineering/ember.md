@@ -147,29 +147,32 @@ fullName: computed('user.firstName', 'user.lastName', {
 Ordering a module's properties in a predictable manner will make it easier to
 scan. Within each of these categories, properties should be ordered alphabetically.
 
-1. __Plain properties__
+1. __Services__
+
+2. __Plain properties__
 
    Start with properties that configure the module's behavior. Examples are
    `tagName` and `classNames` on components and `queryParams` on controllers and
    routes. Followed by any other simple properties, like default values for properties.
 
-2. __Single line computed property macros__
+3. __Single line computed property macros__
 
    E.g. `alias`, `sort` and other macros. Start with service injections. If the
    module is a model, then `attr` properties should be first, followed by
    `belongsTo` and `hasMany`.
 
-3. __Multi line computed property functions__
+4. __Multi line computed property functions__
 
-4. __Lifecycle hooks__
+
+5. __Functions__
+
+   Public functions first, internal functions after.
+
+6. __Lifecycle hooks__
 
    The hooks should be chronologically ordered by the order they are invoked in.
 
-5. __Actions__
-
-6. __Functions__
-
-   Public functions first, internal functions after.
+7. __Actions__
 
 
 ```js
@@ -218,9 +221,13 @@ order. [Don't Don't Override Init](https://dockyard.com/blog/2015/10/19/2015-don
 
 Models should be grouped as follows:
 
+* Services
 * Attributes
 * Associations
+* Inherited Properties
 * Computed Properties
+* Single line functions
+* Multiple line functions
 
 Within each section, the attributes should be ordered alphabetically.
 
